@@ -12,7 +12,7 @@ const apiClient = axios.create({
 const createErrorResult = (error) => {
   const status = error?.response?.status || null
   const message =
-    error?.response?.data?.message || error?.message || 'Beklenmeyen bir hata olustu.'
+    error?.response?.data?.message || error?.message || 'Beklenmeyen bir hata oluştu.'
 
   console.error('API request failed:', {
     status,

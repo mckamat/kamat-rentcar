@@ -27,21 +27,45 @@ function Register() {
 
   const benefits = useMemo(
     () => [
-      { icon: 'pi pi-bolt', title: 'Hizli Rezervasyon', description: 'Saniyeler icinde rezervasyon yapin.' },
-      { icon: 'pi pi-percentage', title: 'Ozel Indirimler', description: 'Uyelere ozel kampanyalardan yararlanin.' },
-      { icon: 'pi pi-history', title: 'Rezervasyon Gecmisi', description: 'Tum kiralama gecmisinizi yonetin.' },
-      { icon: 'pi pi-star-fill', title: 'Sadakat Puanlari', description: 'Her kiralamada puan kazanip kullanin.' },
-      { icon: 'pi pi-headphones', title: 'Oncelikli Destek', description: '7/24 musteri hizmetleri destegi alin.' },
-      { icon: 'pi pi-bell', title: 'Akilli Bildirimler', description: 'Hatirlatma ve teklif bildirimleri alin.' },
+      {
+        icon: 'pi pi-bolt',
+        title: 'Hızlı Rezervasyon',
+        description: 'Saniyeler içinde rezervasyon yapın.',
+      },
+      {
+        icon: 'pi pi-percentage',
+        title: 'Özel İndirimler',
+        description: 'Üyelere özel kampanyalardan yararlanın.',
+      },
+      {
+        icon: 'pi pi-history',
+        title: 'Rezervasyon Geçmişi',
+        description: 'Tüm kiralama geçmişinizi yönetin.',
+      },
+      {
+        icon: 'pi pi-star-fill',
+        title: 'Sadakat Puanları',
+        description: 'Her kiralamada puan kazanıp kullanın.',
+      },
+      {
+        icon: 'pi pi-headphones',
+        title: 'Öncelikli Destek',
+        description: '7/24 müşteri hizmetleri desteği alın.',
+      },
+      {
+        icon: 'pi pi-bell',
+        title: 'Akıllı Bildirimler',
+        description: 'Hatırlatma ve teklif bildirimleri alın.',
+      },
     ],
     [],
   )
 
   const stats = useMemo(
     () => [
-      { value: '50K+', label: 'Mutlu Musteri' },
-      { value: '1000+', label: 'Arac Filosu' },
-      { value: '25', label: 'Sehir' },
+      { value: '50K+', label: 'Mutlu Müşteri' },
+      { value: '1000+', label: 'Araç Filosu' },
+      { value: '25', label: 'Şehir' },
       { value: '7/24', label: 'Destek' },
     ],
     [],
@@ -67,19 +91,19 @@ function Register() {
   }
 
   const strengthScore = getPasswordStrength(formData.password)
-  const strengthText = ['Zayif', 'Zayif', 'Orta', 'Iyi', 'Guclu'][strengthScore]
+  const strengthText = ['Zayıf', 'Zayıf', 'Orta', 'İyi', 'Güçlü'][strengthScore]
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
     const validationResult = registerSchema.safeParse(formData)
     if (!validationResult.success) {
-      const firstError = validationResult.error.issues[0]?.message || 'Form bilgileri gecersiz.'
-      showToast('error', 'Dogrulama Hatasi', firstError)
+      const firstError = validationResult.error.issues[0]?.message || 'Form bilgileri geçersiz.'
+      showToast('error', 'Doğrulama Hatası', firstError)
       return
     }
 
-    showToast('success', 'Basarili', 'Kayit bilgileri dogrulandi.')
+    showToast('success', 'Başarılı', 'Kayıt bilgileri doğrulandı.')
     console.log('Register payload:', validationResult.data)
   }
 
@@ -97,15 +121,15 @@ function Register() {
       >
         <Card className="auth-main-card">
           <div style={{ marginBottom: '1rem' }}>
-            <h1 style={{ marginBottom: '0.25rem' }}>Hos Geldiniz!</h1>
+            <h1 style={{ marginBottom: '0.25rem' }}>Hoş geldiniz!</h1>
             <p style={{ margin: 0, color: '#64748b' }}>
-              Hesabiniza giris yapin veya yeni hesap olusturun.
+              Hesabınıza giriş yapın veya yeni hesap oluşturun.
             </p>
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-            <Button label="Giris Yap" icon="pi pi-sign-in" outlined onClick={() => navigate('/login')} />
-            <Button label="Kayit Ol" icon="pi pi-user-plus" />
+            <Button label="Giriş Yap" icon="pi pi-sign-in" outlined onClick={() => navigate('/login')} />
+            <Button label="Kayıt Ol" icon="pi pi-user-plus" />
           </div>
 
           <form noValidate onSubmit={handleSubmit} style={{ display: 'grid', gap: '0.9rem' }}>
@@ -115,7 +139,7 @@ function Register() {
                 <InputText
                   value={formData.firstName}
                   onChange={(e) => updateField('firstName', e.target.value)}
-                  placeholder="Adiniz"
+                  placeholder="Adınız"
                 />
               </span>
               <span className="p-input-icon-left">
@@ -123,7 +147,7 @@ function Register() {
                 <InputText
                   value={formData.lastName}
                   onChange={(e) => updateField('lastName', e.target.value)}
-                  placeholder="Soyadiniz"
+                  placeholder="Soyadınız"
                 />
               </span>
             </div>
@@ -134,7 +158,7 @@ function Register() {
                 <InputText
                   value={formData.userName}
                   onChange={(e) => updateField('userName', e.target.value)}
-                  placeholder="Kullanici adi"
+                  placeholder="Kullanıcı adı"
                 />
               </span>
               <span className="p-input-icon-left">
@@ -170,7 +194,7 @@ function Register() {
             <Password
               value={formData.password}
               onChange={(e) => updateField('password', e.target.value)}
-              placeholder="Guclu bir sifre olusturun"
+              placeholder="Güçlü bir şifre oluşturun"
               toggleMask
               feedback={false}
               inputStyle={{ width: '100%' }}
@@ -179,7 +203,7 @@ function Register() {
             <Password
               value={formData.confirmPassword}
               onChange={(e) => updateField('confirmPassword', e.target.value)}
-              placeholder="Sifrenizi tekrar girin"
+              placeholder="Şifrenizi tekrar girin"
               toggleMask
               feedback={false}
               inputStyle={{ width: '100%' }}
@@ -187,7 +211,7 @@ function Register() {
             />
 
             <div>
-              <div style={{ marginBottom: '0.35rem', fontSize: '0.9rem' }}>Sifre Gucu: {strengthText}</div>
+              <div style={{ marginBottom: '0.35rem', fontSize: '0.9rem' }}>Şifre gücü: {strengthText}</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.35rem' }}>
                 {[1, 2, 3, 4].map((bar) => (
                   <div
@@ -209,17 +233,17 @@ function Register() {
                 onChange={(e) => updateField('agreeTerms', e.checked)}
               />
               <label htmlFor="agreeTerms">
-                Kullanim Sartlari ve Gizlilik Politikasi&apos;ni kabul ediyorum
+                Kullanım şartları ve gizlilik politikasını kabul ediyorum
               </label>
             </div>
 
-            <Button label="HESAP OLUSTUR" icon="pi pi-user-plus" type="submit" />
+            <Button label="Hesap oluştur" icon="pi pi-user-plus" type="submit" />
           </form>
         </Card>
 
         <Card className="auth-benefits-card">
-          <h2 style={{ marginTop: 0 }}>RentCar&apos;a Uye Olmanin Avantajlari</h2>
-          <p style={{ color: '#64748b' }}>Hesap olusturarak ozel ayricaliklara sahip olun.</p>
+          <h2 style={{ marginTop: 0 }}>RentCar&apos;a üye olmanın avantajları</h2>
+          <p style={{ color: '#64748b' }}>Hesap oluşturarak özel ayrıcalıklara sahip olun.</p>
 
           <div style={{ display: 'grid', gap: '0.75rem' }}>
             {benefits.map((item) => (
@@ -259,7 +283,7 @@ function Register() {
 
           <Card>
             <p style={{ marginTop: 0 }}>
-              &quot;RentCar ile rezervasyon yapmak cok kolay! Uye olduktan sonra her sey cok daha hizli.&quot;
+              &quot;RentCar ile rezervasyon yapmak çok kolay! Üye olduktan sonra her şey çok daha hızlı.&quot;
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <Avatar
@@ -267,7 +291,7 @@ function Register() {
                 shape="circle"
               />
               <div>
-                <div style={{ fontWeight: 700 }}>Ahmet Yilmaz</div>
+                <div style={{ fontWeight: 700 }}>Ahmet Yılmaz</div>
                 <small style={{ color: '#64748b' }}>Verified Customer</small>
               </div>
             </div>

@@ -123,7 +123,7 @@ code {
   background: var(--code-bg);
 }
 
-/* Home sayfasi icin gerekli degiskenler */
+/* Ana sayfa (Home) için renk değişkenleri */
 .home-page {
   --primary-color: #ff6b35;
   --primary-dark: #e85a2f;
@@ -242,9 +242,70 @@ code {
 
 .home-page .booking-form-grid {
   display: grid;
-  grid-template-columns: minmax(10rem, 1.15fr) minmax(11rem, 1fr) minmax(11rem, 1fr) auto;
+  grid-template-columns: minmax(11rem, 1fr) minmax(11rem, 1fr) auto;
   gap: 0.65rem 0.85rem;
   align-items: end;
+}
+
+.home-page .booking-top-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 0.85rem;
+  align-items: end;
+}
+
+.home-page .booking-top-row--single {
+  grid-template-columns: minmax(10rem, 18rem);
+}
+
+.home-page .booking-top-row--triple {
+  grid-template-columns: minmax(9rem, 0.95fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+@media (max-width: 576px) {
+  .home-page .booking-top-row:not(.booking-top-row--single) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Rezervasyon formu toast — portal’da, .home-page dışında */
+.p-toast.home-booking-toast {
+  max-width: 17rem;
+  width: auto;
+}
+
+.p-toast.home-booking-toast .p-toast-message {
+  padding: 0.45rem 0.6rem;
+  margin: 0 0 0.4rem;
+}
+
+.p-toast.home-booking-toast .p-toast-message-content {
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+
+.p-toast.home-booking-toast .p-toast-message-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.1rem;
+}
+
+.p-toast.home-booking-toast .p-toast-message-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.p-toast.home-booking-toast .p-toast-summary {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.p-toast.home-booking-toast .p-toast-detail {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  margin: 0;
 }
 
 .home-page .booking-submit {
@@ -266,8 +327,27 @@ code {
 }
 
 .home-page .booking-field-inline .booking-time-dropdown {
-  flex: 0 1 5.5rem;
-  min-width: 4.75rem;
+  flex: 0 0 7.25rem;
+  min-width: 7.25rem;
+  width: 7.25rem;
+}
+
+.home-page .booking-time-dropdown.p-dropdown {
+  min-height: 2.4rem;
+}
+
+.home-page .booking-time-dropdown .p-dropdown-label,
+.home-page .booking-time-dropdown .p-dropdown-label.p-inputtext {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  padding: 0.45rem 0.5rem;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.home-page .booking-time-dropdown .p-dropdown-trigger {
+  width: 2rem;
 }
 
 .home-page .booking-label {
@@ -438,6 +518,295 @@ code {
 
   .home-page .home-features-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* İletişim sayfası */
+.contact-page {
+  color: #1e293b;
+  text-align: left;
+  padding-bottom: 3rem;
+}
+
+.contact-hero {
+  margin-bottom: 2rem;
+  padding: 2.75rem 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #1e3a5f 45%, #ff6b35 160%);
+  color: #fff;
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+}
+
+.contact-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contact-hero-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.88;
+}
+
+.contact-hero-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.contact-hero-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  opacity: 0.92;
+  max-width: 38rem;
+}
+
+.contact-body {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.contact-body-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: 1.75rem 2rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.contact-card.contact-info-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.contact-card.contact-info-card .p-card-body {
+  padding: 1.35rem 1.35rem 1.5rem;
+}
+
+.contact-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.contact-card-title-bar {
+  width: 4px;
+  height: 1.25rem;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #ff6b35, #e85a2f);
+  flex-shrink: 0;
+}
+
+.contact-map-title {
+  margin-bottom: 0.35rem;
+}
+
+.contact-brand {
+  color: #0f172a;
+  font-size: 1.02rem;
+}
+
+.contact-address {
+  margin: 0;
+  font-style: normal;
+  line-height: 1.7;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.contact-divider {
+  margin: 1.15rem 0;
+}
+
+.contact-details {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-detail-item dt {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 0.2rem;
+}
+
+.contact-detail-item dd {
+  margin: 0;
+  color: #1e293b;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.contact-map-column {
+  min-width: 0;
+}
+
+.contact-map-note {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.contact-map-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+  background: #cbd5e1;
+}
+
+.contact-map-frame iframe {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+}
+
+.contact-refs-section {
+  padding-top: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.contact-refs-head {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 1.75rem;
+}
+
+.contact-refs-heading {
+  margin: 0 0 0.65rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.contact-refs-intro {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #64748b;
+}
+
+.contact-refs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.contact-ref-tile {
+  background: #fff;
+  border: 1px solid #e8ecf1;
+  border-radius: 16px;
+  padding: 1.15rem 1rem 1.1rem;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.contact-ref-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(255, 107, 53, 0.12);
+  border-color: #fecaca;
+}
+
+.contact-ref-image-wrap {
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  padding: 0.65rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.contact-ref-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  outline-offset: 2px;
+}
+
+.contact-ref-link:hover .contact-ref-image,
+.contact-ref-link:focus-visible .contact-ref-image {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+.contact-ref-link:focus-visible {
+  outline: 2px solid #ff6b35;
+}
+
+.contact-ref-image {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 96px;
+  object-fit: contain;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contact-ref-name {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #475569;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .contact-body-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map-frame iframe {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-refs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-hero {
+    padding: 2rem 1rem 2rem;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .contact-refs-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+
+  .contact-map-frame iframe {
+    min-height: 260px;
   }
 }
 

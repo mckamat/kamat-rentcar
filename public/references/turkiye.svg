@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <rect width="200" height="120" rx="8" fill="#e30a17"/>
+  <circle cx="88" cy="60" r="28" fill="#fff"/>
+  <circle cx="96" cy="60" r="24" fill="#e30a17"/>
+  <polygon fill="#fff" points="118,52 122,64 134,64 124,71 128,83 118,76 108,83 112,71 102,64 114,64"/>
+  <text x="100" y="108" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10" font-weight="600" opacity="0.9">T.C.</text>
+</svg>
