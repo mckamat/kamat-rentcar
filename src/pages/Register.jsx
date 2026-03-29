@@ -9,12 +9,14 @@ import { Password } from "primereact/password";
 import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router-dom";
 import { registerSchema } from "./registerValidationZod";
+import { LegalDialog } from "../legal/LegalDialog";
 
 import "./auth-pages.css";
 
 function Register() {
   const navigate = useNavigate();
   const toast = useRef(null);
+  const [legalDialog, setLegalDialog] = useState(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -114,6 +116,7 @@ function Register() {
 
   return (
     <section className="register-page">
+      <LegalDialog type={legalDialog} onHide={() => setLegalDialog(null)} />
       <Toast ref={toast} position="top-right" />
       <div className="auth-grid">
         <Card className="auth-main-card">
@@ -247,8 +250,32 @@ function Register() {
                 checked={formData.agreeTerms}
                 onChange={(e) => updateField("agreeTerms", e.checked)}
               />
-              <label htmlFor="agreeTerms">
-                Kullanım şartları ve gizlilik politikasını kabul ediyorum
+              <label htmlFor="agreeTerms" className="auth-terms-label">
+                <button
+                  type="button"
+                  className="auth-legal-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLegalDialog("terms");
+                  }}
+                >
+                  Kullanım şartları
+                </button>
+                {" "}ve{" "}
+                <button
+                  type="button"
+                  className="auth-legal-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLegalDialog("privacy");
+                  }}
+                >
+                  gizlilik politikasını
+                </button>
+                {" "}
+                kabul ediyorum.
               </label>
             </div>
 

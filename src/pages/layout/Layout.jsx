@@ -3,11 +3,13 @@ import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { Sidebar } from "primereact/sidebar";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { LegalDialog } from "../../legal/LegalDialog";
 
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [legalDialog, setLegalDialog] = useState(null);
   const activePath = location.pathname;
 
   const navItems = useMemo(
@@ -209,19 +211,25 @@ function Layout() {
             </span>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               <Button
+                type="button"
                 text
                 label="Gizlilik Politikası"
                 style={{ color: "#cbd5e1" }}
+                onClick={() => setLegalDialog("privacy")}
               />
               <Button
+                type="button"
                 text
                 label="Kullanım Şartları"
                 style={{ color: "#cbd5e1" }}
+                onClick={() => setLegalDialog("terms")}
               />
             </div>
           </div>
         </div>
       </footer>
+
+      <LegalDialog type={legalDialog} onHide={() => setLegalDialog(null)} />
     </main>
   );
 }
