@@ -190,7 +190,7 @@ function Layout() {
                   className="pi pi-map-marker"
                   style={{ marginRight: "0.5rem" }}
                 />
-                Kayseri, Türkiye
+                Ankara, Türkiye
               </p>
             </div>
           </div>
@@ -205,7 +205,7 @@ function Layout() {
             }}
           >
             <span style={{ opacity: 0.8 }}>
-              &copy; 2025 RentCar. Tüm hakları saklıdır.
+              &copy; {new Date().getFullYear()} RentCar. Tüm hakları saklıdır.
             </span>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               <Button

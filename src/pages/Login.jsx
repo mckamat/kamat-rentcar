@@ -10,6 +10,8 @@ import { Toast } from 'primereact/toast'
 import { useNavigate } from 'react-router-dom'
 import { loginSchema } from './loginValidationZod'
 
+import './auth-pages.css'
+
 function Login() {
   const navigate = useNavigate()
   const toast = useRef(null)
@@ -88,26 +90,18 @@ function Login() {
   }
 
   return (
-    <section className="login-page" style={{ padding: '1rem' }}>
+    <section className="login-page">
       <Toast ref={toast} position="top-right" />
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '1rem',
-        }}
-      >
+      <div className="auth-grid">
         <Card className="auth-main-card">
-          <div style={{ marginBottom: '1rem' }}>
-            <h1 style={{ marginBottom: '0.25rem' }}>Hoş geldiniz!</h1>
-            <p style={{ margin: 0, color: '#64748b' }}>
+          <div>
+            <h1 className="auth-hero-title">Hoş geldiniz!</h1>
+            <p className="auth-hero-sub">
               Hesabınıza giriş yapın veya yeni hesap oluşturun.
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div className="auth-mode-tabs">
             <Button label="Giriş Yap" icon="pi pi-sign-in" />
             <Button
               label="Kayıt Ol"
@@ -117,12 +111,10 @@ function Login() {
             />
           </div>
 
-          <form noValidate onSubmit={handleSubmit} style={{ display: 'grid', gap: '1rem' }}>
-            <div>
-              <label htmlFor="loginEmail" style={{ display: 'block', marginBottom: '0.35rem' }}>
-                E-posta Adresi
-              </label>
-              <span className="p-input-icon-left" style={{ width: '100%' }}>
+          <form className="auth-form" noValidate onSubmit={handleSubmit}>
+            <div className="auth-field">
+              <label htmlFor="loginEmail">E-posta Adresi</label>
+              <span className="p-input-icon-left">
                 <i className="pi pi-envelope" />
                 <InputText
                   id="loginEmail"
@@ -130,15 +122,12 @@ function Login() {
                   onChange={(e) => updateField('email', e.target.value)}
                   placeholder="E-posta adresinizi girin"
                   type="email"
-                  style={{ width: '100%' }}
                 />
               </span>
             </div>
 
-            <div>
-              <label htmlFor="loginPassword" style={{ display: 'block', marginBottom: '0.35rem' }}>
-                Şifre
-              </label>
+            <div className="auth-field">
+              <label htmlFor="loginPassword">Şifre</label>
               <Password
                 id="loginPassword"
                 value={formData.password}
@@ -151,8 +140,8 @@ function Login() {
               />
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="auth-field-row">
+              <div className="auth-remember">
                 <Checkbox
                   inputId="rememberMe"
                   checked={formData.rememberMe}
@@ -168,20 +157,16 @@ function Login() {
         </Card>
 
         <Card className="auth-benefits-card">
-          <h2 style={{ marginTop: 0 }}>RentCar&apos;a üye olmanın avantajları</h2>
-          <p style={{ color: '#64748b' }}>Hesap oluşturarak özel ayrıcalıklara sahip olun.</p>
+          <h2>RentCar&apos;a üye olmanın avantajları</h2>
+          <p className="auth-benefits-lead">Hesap oluşturarak özel ayrıcalıklara sahip olun.</p>
 
-          <div style={{ display: 'grid', gap: '0.75rem' }}>
+          <div className="auth-benefits-list">
             {benefits.map((item) => (
-              <div
-                key={item.title}
-                className="auth-benefit-item"
-                style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}
-              >
-                <i className={item.icon} style={{ fontSize: '1.1rem', color: '#2563eb', marginTop: '0.2rem' }} />
+              <div key={item.title} className="auth-benefit-item">
+                <i className={item.icon} />
                 <div>
                   <strong>{item.title}</strong>
-                  <p style={{ margin: '0.2rem 0 0', color: '#64748b' }}>{item.description}</p>
+                  <p>{item.description}</p>
                 </div>
               </div>
             ))}
@@ -189,36 +174,34 @@ function Login() {
 
           <Divider />
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-              gap: '0.75rem',
-              textAlign: 'center',
-            }}
-          >
+          <div className="auth-stats-grid">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#1d4ed8' }}>{stat.value}</div>
-                <small style={{ color: '#64748b' }}>{stat.label}</small>
+                <div className="auth-stat-value">{stat.value}</div>
+                <small className="auth-stat-label">{stat.label}</small>
               </div>
             ))}
           </div>
 
           <Divider />
 
-          <Card>
-            <p style={{ marginTop: 0 }}>
+          <Card className="auth-quote-card">
+            <p>
               &quot;RentCar ile rezervasyon yapmak çok kolay! Üye olduktan sonra her şey çok daha hızlı.&quot;
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div className="auth-quote-author">
               <Avatar
                 image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBRW6kw4PvewS5EGHKY7nNsJiWvrbsVIzZA&s"
                 shape="circle"
               />
               <div>
-                <div style={{ fontWeight: 700 }}>Ahmet Yılmaz</div>
-                <small style={{ color: '#64748b' }}>Verified Customer</small>
+                <div className="auth-quote-name">Ahmet Yılmaz</div>
+                <small className="auth-quote-role">Verified Customer</small>
+                <div className="auth-quote-stars" aria-label="5 üzerinden 5 yıldız">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <i key={n} className="pi pi-star-fill" aria-hidden />
+                  ))}
+                </div>
               </div>
             </div>
           </Card>

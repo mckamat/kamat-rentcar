@@ -810,27 +810,6 @@ code {
   }
 }
 
-.login-page .auth-main-card,
-.login-page .auth-benefits-card,
-.register-page .auth-main-card,
-.register-page .auth-benefits-card {
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-}
-
-.login-page .auth-benefit-item,
-.register-page .auth-benefit-item {
-  padding: 0.5rem;
-  border-radius: 10px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.login-page .auth-benefit-item:hover,
-.register-page .auth-benefit-item:hover {
-  background-color: #eff6ff;
-  transform: translateX(4px);
-}
-
 .app-layout {
   background: #f8fafc;
   margin: 0;
@@ -847,6 +826,12 @@ code {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+}
+
+.layout-outlet > .login-page,
+.layout-outlet > .register-page {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .layout-nav-links .p-button.p-button-text {

@@ -10,6 +10,8 @@ import { Toast } from 'primereact/toast'
 import { useNavigate } from 'react-router-dom'
 import { registerSchema } from './registerValidationZod'
 
+import './auth-pages.css'
+
 function Register() {
   const navigate = useNavigate()
   const toast = useRef(null)
@@ -108,32 +110,24 @@ function Register() {
   }
 
   return (
-    <section className="register-page" style={{ padding: '1rem' }}>
+    <section className="register-page">
       <Toast ref={toast} position="top-right" />
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '1rem',
-        }}
-      >
+      <div className="auth-grid">
         <Card className="auth-main-card">
-          <div style={{ marginBottom: '1rem' }}>
-            <h1 style={{ marginBottom: '0.25rem' }}>Hoş geldiniz!</h1>
-            <p style={{ margin: 0, color: '#64748b' }}>
-              Hesabınıza giriş yapın veya yeni hesap oluşturun.
+          <div>
+            <h1 className="auth-hero-title">Hesap oluşturun</h1>
+            <p className="auth-hero-sub">
+              Birkaç bilgi ile RentCar üyesi olun ve avantajlardan yararlanın.
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div className="auth-mode-tabs">
             <Button label="Giriş Yap" icon="pi pi-sign-in" outlined onClick={() => navigate('/login')} />
             <Button label="Kayıt Ol" icon="pi pi-user-plus" />
           </div>
 
-          <form noValidate onSubmit={handleSubmit} style={{ display: 'grid', gap: '0.9rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
+          <form className="auth-form" noValidate onSubmit={handleSubmit}>
+            <div className="auth-form-row">
               <span className="p-input-icon-left">
                 <i className="pi pi-user" />
                 <InputText
@@ -152,7 +146,7 @@ function Register() {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
+            <div className="auth-form-row">
               <span className="p-input-icon-left">
                 <i className="pi pi-user-edit" />
                 <InputText
@@ -172,13 +166,14 @@ function Register() {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem' }}>
+            <div className="auth-form-row">
               <span className="p-input-icon-left">
                 <i className="pi pi-phone" />
                 <InputText
                   value={formData.phone1}
                   onChange={(e) => updateField('phone1', sanitizePhone(e.target.value))}
                   placeholder="5XXXXXXXXX"
+                  inputMode="numeric"
                 />
               </span>
               <span className="p-input-icon-left">
@@ -187,46 +182,52 @@ function Register() {
                   value={formData.phone2}
                   onChange={(e) => updateField('phone2', sanitizePhone(e.target.value))}
                   placeholder="5XXXXXXXXX"
+                  inputMode="numeric"
                 />
               </span>
             </div>
 
-            <Password
-              value={formData.password}
-              onChange={(e) => updateField('password', e.target.value)}
-              placeholder="Güçlü bir şifre oluşturun"
-              toggleMask
-              feedback={false}
-              inputStyle={{ width: '100%' }}
-              style={{ width: '100%' }}
-            />
-            <Password
-              value={formData.confirmPassword}
-              onChange={(e) => updateField('confirmPassword', e.target.value)}
-              placeholder="Şifrenizi tekrar girin"
-              toggleMask
-              feedback={false}
-              inputStyle={{ width: '100%' }}
-              style={{ width: '100%' }}
-            />
+            <div className="auth-field">
+              <label htmlFor="regPassword">Şifre</label>
+              <Password
+                id="regPassword"
+                value={formData.password}
+                onChange={(e) => updateField('password', e.target.value)}
+                placeholder="Güçlü bir şifre oluşturun"
+                toggleMask
+                feedback={false}
+                inputStyle={{ width: '100%' }}
+                style={{ width: '100%' }}
+              />
+            </div>
+
+            <div className="auth-field">
+              <label htmlFor="regConfirmPassword">Şifre tekrar</label>
+              <Password
+                id="regConfirmPassword"
+                value={formData.confirmPassword}
+                onChange={(e) => updateField('confirmPassword', e.target.value)}
+                placeholder="Şifrenizi tekrar girin"
+                toggleMask
+                feedback={false}
+                inputStyle={{ width: '100%' }}
+                style={{ width: '100%' }}
+              />
+            </div>
 
             <div>
-              <div style={{ marginBottom: '0.35rem', fontSize: '0.9rem' }}>Şifre gücü: {strengthText}</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.35rem' }}>
+              <div className="auth-strength-label">Şifre gücü: {strengthText}</div>
+              <div className="auth-strength-bars">
                 {[1, 2, 3, 4].map((bar) => (
                   <div
                     key={bar}
-                    style={{
-                      height: '6px',
-                      borderRadius: '999px',
-                      backgroundColor: strengthScore >= bar ? '#22c55e' : '#cbd5e1',
-                    }}
+                    className={`auth-strength-bar${strengthScore >= bar ? ' active' : ''}`}
                   />
                 ))}
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="auth-terms">
               <Checkbox
                 inputId="agreeTerms"
                 checked={formData.agreeTerms}
@@ -242,20 +243,16 @@ function Register() {
         </Card>
 
         <Card className="auth-benefits-card">
-          <h2 style={{ marginTop: 0 }}>RentCar&apos;a üye olmanın avantajları</h2>
-          <p style={{ color: '#64748b' }}>Hesap oluşturarak özel ayrıcalıklara sahip olun.</p>
+          <h2>RentCar&apos;a üye olmanın avantajları</h2>
+          <p className="auth-benefits-lead">Hesap oluşturarak özel ayrıcalıklara sahip olun.</p>
 
-          <div style={{ display: 'grid', gap: '0.75rem' }}>
+          <div className="auth-benefits-list">
             {benefits.map((item) => (
-              <div
-                key={item.title}
-                className="auth-benefit-item"
-                style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}
-              >
-                <i className={item.icon} style={{ fontSize: '1.1rem', color: '#2563eb', marginTop: '0.2rem' }} />
+              <div key={item.title} className="auth-benefit-item">
+                <i className={item.icon} />
                 <div>
                   <strong>{item.title}</strong>
-                  <p style={{ margin: '0.2rem 0 0', color: '#64748b' }}>{item.description}</p>
+                  <p>{item.description}</p>
                 </div>
               </div>
             ))}
@@ -263,36 +260,34 @@ function Register() {
 
           <Divider />
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-              gap: '0.75rem',
-              textAlign: 'center',
-            }}
-          >
+          <div className="auth-stats-grid">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#1d4ed8' }}>{stat.value}</div>
-                <small style={{ color: '#64748b' }}>{stat.label}</small>
+                <div className="auth-stat-value">{stat.value}</div>
+                <small className="auth-stat-label">{stat.label}</small>
               </div>
             ))}
           </div>
 
           <Divider />
 
-          <Card>
-            <p style={{ marginTop: 0 }}>
+          <Card className="auth-quote-card">
+            <p>
               &quot;RentCar ile rezervasyon yapmak çok kolay! Üye olduktan sonra her şey çok daha hızlı.&quot;
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div className="auth-quote-author">
               <Avatar
                 image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBRW6kw4PvewS5EGHKY7nNsJiWvrbsVIzZA&s"
                 shape="circle"
               />
               <div>
-                <div style={{ fontWeight: 700 }}>Ahmet Yılmaz</div>
-                <small style={{ color: '#64748b' }}>Verified Customer</small>
+                <div className="auth-quote-name">Ahmet Yılmaz</div>
+                <small className="auth-quote-role">Verified Customer</small>
+                <div className="auth-quote-stars" aria-label="5 üzerinden 5 yıldız">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <i key={n} className="pi pi-star-fill" aria-hidden />
+                  ))}
+                </div>
               </div>
             </div>
           </Card>
